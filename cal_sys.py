@@ -16,7 +16,8 @@ def mdfk():
 	
 	for op_sign in op:
 		if op_sign == '+':
-			que += get_num()
+			num = get_num()
+			que += num
 			danger += 1
 		
 		if op_sign == '-':
@@ -35,33 +36,42 @@ def mdfk():
 			danger += 1
 
 		if op_sign == '×':
-			que *= get_num()
+			num = get_num()
+			que *= num
+			danger -= 99
 		
 		if op_sign == '÷':
-			#if num == 0 : num = get_num()
-			#if num > que : que =
-			print("mismatch")
-			break
-		
+			num = 0
+			while num == 0 : 
+				num = get_num()
+				if num != 0:
+					break
+			if num > que :
+				que = que/num
+			else :
+				que = num/que
+				danger -= 1
+				swap = 1
+
 		if op_sign == '×' or op_sign == '÷':
 			if danger >= 1:
 				question = ['('] + question + [')']
+				danger = 0
+			if danger < -98:
+				question = ['('] + question + [')']
+				danger = 0
 
 		if swap == 1 :
 			question = [num] + [op_sign] + question
 			swap = 0
 		else:
 			question = question + [op_sign] + [num]
+		print (question)
+		print (que)
 	question = ' '.join('%s' %id for id in question)
 	print (question)
+	print (que)
 
-def get_num():
-	i = 0
-	i = random.randint(0,9)
-	return i
-
-if __name__ == "__main__":
-	mdfk()
 def get_num():
 	i = 0
 	i = random.randint(0,9)
