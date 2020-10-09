@@ -41,7 +41,6 @@ def mdfk():
 		if op_sign == '×':
 			num = get_num()
 			que *= num
-			danger -= 1
 		
 		if op_sign == '÷':
 			num = 0
