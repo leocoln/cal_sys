@@ -9,6 +9,7 @@ def mdfk():
 	num = 0
 	swap = 0
 	danger = 0
+	time = 0
 	que = get_num()
 	question = [que]
 	for i in range(op_amount):
@@ -19,6 +20,7 @@ def mdfk():
 			num = get_num()
 			que += num
 			danger += 1
+			time += 1
 		
 		if op_sign == '-':
 			num = get_num()
@@ -34,11 +36,12 @@ def mdfk():
 						que = que - num
 						break
 			danger += 1
+			time += 1
 
 		if op_sign == '×':
 			num = get_num()
 			que *= num
-			danger -= 99
+			danger -= 1
 		
 		if op_sign == '÷':
 			num = 0
@@ -50,16 +53,13 @@ def mdfk():
 				que = que/num
 			else :
 				que = num/que
-				danger -= 1
 				swap = 1
 
 		if op_sign == '×' or op_sign == '÷':
 			if danger >= 1:
 				question = ['('] + question + [')']
 				danger = 0
-			if danger < -98:
-				question = ['('] + question + [')']
-				danger = 0
+
 
 		if swap == 1 :
 			question = [num] + [op_sign] + question
