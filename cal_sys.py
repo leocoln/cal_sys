@@ -23,13 +23,19 @@ def mdfk():
 			num = get_num()
 			if que > num : 
 				que -= num
-			else: 
+			elif que < num :
 				swap = 1
 				que = num - que
+			else:
+				while 1:
+					num = get_num()
+					if que>= num:
+						que = que - num
+						break
 			danger += 1
 
 		if op_sign == '×':
-			que *= get_num
+			que *= get_num()
 		
 		if op_sign == '÷':
 			#if num == 0 : num = get_num()
@@ -49,6 +55,13 @@ def mdfk():
 	question = ' '.join('%s' %id for id in question)
 	print (question)
 
+def get_num():
+	i = 0
+	i = random.randint(0,9)
+	return i
+
+if __name__ == "__main__":
+	mdfk()
 def get_num():
 	i = 0
 	i = random.randint(0,9)
