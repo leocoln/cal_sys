@@ -1,4 +1,31 @@
+import random
+from fractions import Fraction
 
+op_standrad = ['+','-','×','÷']
+limit = 9
+
+def que_creation(limit):
+	op_amount = random.randint(1,3)
+	op = []
+	num = 0
+	swap = 0
+	danger = 0
+	time = 0
+	que = get_num(limit)
+	last_question = []
+	question = [change_Fraction(que)]
+	for i in range(op_amount):
+		op.append(random.choice(op_standrad))
+	
+	for op_sign in op:
+		time += 1
+		if time == 1:
+			last_question = question
+		else:
+			last_question = [change_Fraction(que)]
+
+		if op_sign == '+':
+			num = get_num(limit)
 			que += num
 			danger += 1
 		
@@ -52,34 +79,13 @@
 			last_question = last_question + [op_sign] + [num]
 		print (question)
 	question = ' '.join('%s' %id for id in question)
-	last_quesetion = ' '.join('%s' %id for id in last_question)
-	print ("the whole expression is:",question)
-	print ("the last step is:",last_question)
+	last_question = ' '.join('%s' %id for id in last_question)
+	#print ("the whole expression is:",question)
+	#print ("the last step is:",last_question)
+	return question,last_question
 
 def get_num(limit):
 	weight = random.randint(1,10)
 	
 	if weight >= 4:
 		return random.randint(0,limit)
-		
-	if weight <= 2:
-		down_num = random.randint(2,min(9,limit))
-		up_num = random.randint(1,down_num - 1)
-		return Fraction(up_num,down_num)
-		
-	else:
-		down_num = random.randint(2,min(9,limit))
-		up_num = random.randint(down_num,limit*down_num-1)
-		return Fraction(up_num,down_num)
-
-def change_Fraction(num):
-	if isinstance(num,int):
-		return (str(num))
-	x = num.numerator
-	y = num.denominator
-	z = int(num)
-	if y == 1 or z == 0:
-		return (str(num))
-	else:
-		num -= z
-		return (str(z)+"’"+str(num))
