@@ -2,7 +2,6 @@ import random
 from fractions import Fraction
 
 op_standrad = ['+','-','×','÷']
-limit = 9
 
 def que_creation(limit):
 	op_amount = random.randint(1,3)
@@ -57,10 +56,7 @@ def que_creation(limit):
 				num = get_num(limit)
 				if num != 0:
 					break
-			if time == 1 :
-				que = Fraction(num,que)
-			else:
-				que = que/num
+			que = Fraction(que,num)
 
 		num = change_Fraction(num)
 
@@ -77,7 +73,8 @@ def que_creation(limit):
 		else:
 			question = question + [op_sign] + [num]
 			last_question = last_question + [op_sign] + [num]
-		print (question)
+		#print (question)
+		#print (que)
 	question = ' '.join('%s' %id for id in question)
 	last_question = ' '.join('%s' %id for id in last_question)
 	#print ("the whole expression is:",question)
@@ -89,3 +86,28 @@ def get_num(limit):
 	
 	if weight >= 4:
 		return random.randint(0,limit)
+		
+	if weight <= 2:
+		down_num = random.randint(2,max(4,limit))
+		up_num = random.randint(1,down_num - 1)
+		return Fraction(up_num,down_num)
+		
+	else:
+		down_num = random.randint(2,max(4,limit))
+		up_num = random.randint(down_num,limit*down_num-1)
+		return Fraction(up_num,down_num)
+
+def change_Fraction(num):
+	if isinstance(num,int):
+		return (str(num))
+	x = num.numerator
+	y = num.denominator
+	z = int(num)
+	if y == 1 or z == 0:
+		return (str(num))
+	else:
+		num -= z
+		return (str(z)+"’"+str(num))
+
+if(__name__=="__main__"):
+	que_creation(limit)
